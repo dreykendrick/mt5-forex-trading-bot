@@ -1,0 +1,89 @@
+# Core Data Processing and Scientific Computing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Machine Learning Libraries
+scikit-learn>=1.3.0
+tensorflow>=2.13.0
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Trading and Financial Data
+MetaTrader5>=5.0.0
+yfinance>=0.2.32
+ta-lib>=0.4.28
+ccxt>=2.95.0
+
+# Technical Analysis
+pandas-ta>=0.3.14
+TA-Lib>=0.4.28
+mplfinance>=0.12.9
+
+# Deep Learning and Neural Networks
+keras>=2.13.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# Data Visualization
+matplotlib>=3.7.0
+plotly>=5.16.0
+seaborn>=0.12.0
+
+# Utilities and Configuration
+python-dotenv>=1.0.0
+requests>=2.31.0
+pyyaml>=6.0
+jsonschema>=4.19.0
+
+# Logging and Monitoring
+python-logging-loki>=0.3.2
+prometheus-client>=0.17.1
+
+# API and Web Framework
+flask>=2.3.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+pymongo>=4.5.0
+
+# Task Scheduling
+celery>=5.3.0
+schedule>=1.2.0
+APScheduler>=3.10.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+
+# Code Quality
+black>=23.9.0
+flake8>=6.1.0
+pylint>=2.17.0
+mypy>=1.5.0
+
+# Development Tools
+jupyter>=1.0.0
+ipython>=8.15.0
+jupyter-contrib-nbextensions>=0.7.0
+
+# Risk Management and Analysis
+zipline-reloaded>=2.9.0
+backtrader>=1.9.76
+
+# Time Zone and Date Handling
+pytz>=2023.3
+python-dateutil>=2.8.2
+
+# Async and Concurrency
+aiohttp>=3.8.0
+asyncio-contextmanager>=1.0.0
+
+# Environment Variables and Config
+python-decouple>=3.8
