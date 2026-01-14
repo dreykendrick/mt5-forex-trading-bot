@@ -1,0 +1,136 @@
+# Credentials and API Keys
+.env
+.env.local
+.env.*.local
+credentials.json
+api_keys.json
+config.secret.json
+*.key
+*.pem
+aws_credentials
+azure_credentials
+gcp_credentials.json
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.atom/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+env.bak/
+venv.bak/
+
+# PyCharm
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+
+# Logs
+logs/
+*.log
+*.log.*
+log.txt
+debug.log
+error.log
+
+# Data and backups
+data/
+backups/
+*.backup
+*.bak
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+*.xlsx
+*.xls
+dump/
+*.dump
+
+# MT5 specific files
+MQL5/
+*.ex5
+*.ex4
+terminal/
+profile/
+
+# Cache directories
+cache/
+.cache/
+tmp/
+temp/
+*.tmp
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Runtime and process files
+*.pid
+.run
+.lock
+*.lock
+
+# User-specific files
+.user
+*.user
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IPython
+.ipython/
+
+# Local development files
+local_config.py
+dev_config.py
+test_data/
