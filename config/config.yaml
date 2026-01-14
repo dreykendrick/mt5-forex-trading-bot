@@ -1,0 +1,385 @@
+# MT5 Forex Trading Bot Configuration
+# Version: 1.0.0
+# Last Updated: 2026-01-14
+
+# ============================================================================
+# TRADING PARAMETERS
+# ============================================================================
+trading:
+  # Account settings
+  account:
+    login: ""  # MT5 account login
+    password: ""  # MT5 account password (use environment variable in production)
+    server: ""  # MT5 server name (e.g., "ICMarketsSC-Demo")
+    
+  # Trading mode
+  mode: "paper"  # Options: "paper" (backtesting), "live" (real trading)
+  
+  # Execution settings
+  execution:
+    order_type: "market"  # Options: "market", "limit"
+    slippage_points: 10  # Max acceptable slippage in points
+    max_attempts: 3  # Max order retry attempts
+    retry_delay_seconds: 5  # Delay between retry attempts
+
+# ============================================================================
+# CURRENCY PAIRS & SYMBOLS
+# ============================================================================
+symbols:
+  # List of trading pairs
+  pairs:
+    - "EURUSD"
+    - "GBPUSD"
+    - "USDJPY"
+    - "AUDUSD"
+    - "USDCAD"
+    - "NZDUSD"
+    - "EURJPY"
+    - "GBPJPY"
+    - "EURGBP"
+    - "AUDJPY"
+  
+  # Symbol-specific settings
+  symbol_config:
+    EURUSD:
+      enabled: true
+      min_volume: 0.1
+      max_volume: 10.0
+      spread_max_points: 5
+    GBPUSD:
+      enabled: true
+      min_volume: 0.1
+      max_volume: 10.0
+      spread_max_points: 5
+    USDJPY:
+      enabled: true
+      min_volume: 0.1
+      max_volume: 10.0
+      spread_max_points: 5
+    AUDUSD:
+      enabled: true
+      min_volume: 0.1
+      max_volume: 10.0
+      spread_max_points: 5
+
+# ============================================================================
+# TIMEFRAMES
+# ============================================================================
+timeframes:
+  # Primary analysis timeframes
+  analysis_timeframes:
+    - "M5"    # 5 minutes
+    - "M15"   # 15 minutes
+    - "M30"   # 30 minutes
+    - "H1"    # 1 hour
+    - "H4"    # 4 hours
+    - "D1"    # Daily
+  
+  # Trading timeframe (where signals are executed)
+  trading_timeframe: "H1"
+  
+  # Confirmation timeframe (higher timeframe for confirmation)
+  confirmation_timeframe: "H4"
+  
+  # Lookback periods
+  lookback_bars: 200  # Number of bars to load for analysis
+
+# ============================================================================
+# MACHINE LEARNING MODEL SETTINGS
+# ============================================================================
+ml_model:
+  # Model configuration
+  model:
+    type: "neural_network"  # Options: "neural_network", "xgboost", "random_forest", "ensemble"
+    name: "forex_prediction_model"
+    version: "1.0.0"
+    model_path: "./models/"
+    
+  # Input features
+  features:
+    technical_indicators:
+      - "rsi"
+      - "macd"
+      - "bollinger_bands"
+      - "moving_averages"
+      - "atr"
+      - "stochastic"
+    
+    price_action:
+      - "returns"
+      - "volatility"
+      - "volume_profile"
+      - "order_flow"
+    
+    market_conditions:
+      - "trend_direction"
+      - "trend_strength"
+      - "market_regime"
+      - "economic_calendar_events"
+  
+  # Neural Network specific settings
+  neural_network:
+    input_size: 50
+    hidden_layers:
+      - 128
+      - 64
+      - 32
+    output_size: 3  # Buy, Sell, Hold
+    activation: "relu"
+    output_activation: "softmax"
+    dropout_rate: 0.3
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 100
+    
+  # Model training settings
+  training:
+    test_split: 0.2  # 80/20 train/test split
+    validation_split: 0.1
+    random_state: 42
+    normalize_features: true
+    feature_scaling: "standard"  # Options: "standard", "minmax"
+    
+  # Model prediction settings
+  prediction:
+    confidence_threshold: 0.65  # Minimum confidence to trade
+    prediction_horizon: 4  # Number of bars ahead to predict
+    ensemble_threshold: 0.6  # For ensemble models, voting threshold
+
+# ============================================================================
+# RISK MANAGEMENT RULES
+# ============================================================================
+risk_management:
+  # Position sizing
+  position_sizing:
+    method: "fixed"  # Options: "fixed", "percentage", "kelly", "volatility"
+    
+    # Fixed lot size
+    fixed:
+      lot_size: 0.1  # in units (e.g., 0.1 = 1 micro lot for standard account)
+    
+    # Percentage of account
+    percentage:
+      percent_per_trade: 2.0  # % of account balance per trade
+      max_daily_percent: 5.0  # Max % of account per day
+    
+    # Kelly Criterion
+    kelly:
+      kelly_fraction: 0.25  # Conservative Kelly fraction (0.25 = 1/4 Kelly)
+    
+    # Volatility-based sizing
+    volatility:
+      base_lot_size: 0.1
+      volatility_period: 20
+      volatility_multiplier: 1.0
+  
+  # Stop loss and take profit
+  stop_loss_take_profit:
+    # Stop loss settings
+    stop_loss:
+      method: "fixed"  # Options: "fixed", "atr", "percent"
+      
+      fixed:
+        points: 50  # Fixed stop loss in points
+      
+      atr:
+        period: 14
+        multiplier: 2.0  # e.g., 2x ATR
+      
+      percent:
+        percentage: 1.5  # % of entry price
+    
+    # Take profit settings
+    take_profit:
+      method: "fixed"  # Options: "fixed", "atr", "percent", "risk_reward"
+      
+      fixed:
+        points: 100  # Fixed take profit in points
+      
+      atr:
+        period: 14
+        multiplier: 3.0  # e.g., 3x ATR
+      
+      percent:
+        percentage: 2.5  # % of entry price
+      
+      risk_reward:
+        ratio: 2.0  # 1:2 risk-reward ratio
+    
+    # Trailing stop loss
+    trailing_stop:
+      enabled: false
+      method: "points"  # Options: "points", "percent"
+      points: 20  # Trail by X points
+      percent: 0.5  # Trail by X%
+  
+  # Daily & Account limits
+  limits:
+    # Daily loss limit (stop trading if exceeded)
+    daily_loss_limit_percent: 5.0  # Stop trading if lost 5% in a day
+    
+    # Maximum daily trades
+    max_trades_per_day: 10
+    
+    # Maximum concurrent positions
+    max_concurrent_positions: 3
+    
+    # Maximum correlation between open positions
+    max_position_correlation: 0.7
+    
+    # Account balance drawdown limits
+    max_drawdown_percent: 20.0  # Max drawdown before emergency stop
+    max_consecutive_losses: 5  # Max consecutive losing trades
+  
+  # Risk parameters
+  risk_parameters:
+    risk_per_trade: 1.0  # % of account risked per trade
+    
+    # Maximum leverage
+    max_leverage: 1.0  # 1:1 (no leverage)
+    
+    # Minimum account balance for trading
+    min_account_balance: 1000.0
+    
+    # Equity minimum requirement
+    min_equity_percent: 30.0  # % of account balance minimum
+  
+  # Trade filtering and restrictions
+  trade_filtering:
+    # Time-based restrictions
+    trading_hours:
+      enabled: true
+      start_hour: 8  # Trading starts at 8 AM
+      end_hour: 20  # Trading stops at 8 PM
+      timezone: "UTC"
+    
+    # No trading on low liquidity periods
+    avoid_news_events: true
+    news_lookback_minutes: 30
+    news_lookahead_minutes: 30
+    
+    # Avoid trading during major economic data releases
+    exclude_high_impact_news: true
+    
+    # Minimum bars required before trading
+    warmup_bars: 50
+    
+    # Trade only during trending markets
+    require_trending_market: false
+    trend_strength_threshold: 0.6
+
+# ============================================================================
+# LOGGING & MONITORING
+# ============================================================================
+logging:
+  level: "INFO"  # Options: "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"
+  file: "./logs/trading_bot.log"
+  max_file_size_mb: 100
+  backup_count: 10
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+monitoring:
+  # Performance metrics
+  track_metrics: true
+  
+  # Real-time alerts
+  alerts:
+    enabled: true
+    email_on_error: true
+    email_recipients: []
+    
+  # Statistics logging
+  stats_update_interval_seconds: 300
+
+# ============================================================================
+# BACKTESTING SETTINGS
+# ============================================================================
+backtesting:
+  enabled: true
+  
+  # Data settings
+  data:
+    source: "mt5"  # Options: "mt5", "csv", "api"
+    start_date: "2023-01-01"
+    end_date: "2025-12-31"
+    timeframe: "H1"
+  
+  # Backtesting parameters
+  parameters:
+    initial_balance: 10000.0
+    commission_percent: 0.001  # Trading commission/spread in %
+    slippage_points: 2
+    
+  # Optimization
+  optimization:
+    enabled: false
+    parameters_to_optimize:
+      - "stop_loss_multiplier"
+      - "take_profit_multiplier"
+      - "confidence_threshold"
+
+# ============================================================================
+# DATABASE & PERSISTENCE
+# ============================================================================
+database:
+  # Trade history
+  trades:
+    enabled: true
+    database_type: "sqlite"  # Options: "sqlite", "postgresql", "mysql"
+    sqlite_file: "./data/trades.db"
+  
+  # Model persistence
+  model_checkpoint:
+    enabled: true
+    checkpoint_dir: "./models/checkpoints/"
+    save_interval_hours: 1
+
+# ============================================================================
+# NOTIFICATION SETTINGS
+# ============================================================================
+notifications:
+  # Discord notifications
+  discord:
+    enabled: false
+    webhook_url: ""  # Set via environment variable
+    notify_on:
+      - "trade_opened"
+      - "trade_closed"
+      - "daily_summary"
+  
+  # Telegram notifications
+  telegram:
+    enabled: false
+    bot_token: ""  # Set via environment variable
+    chat_id: ""  # Set via environment variable
+    notify_on:
+      - "errors"
+      - "signals"
+  
+  # Email notifications
+  email:
+    enabled: false
+    smtp_server: ""
+    smtp_port: 587
+    from_address: ""
+    to_addresses: []
+
+# ============================================================================
+# ENVIRONMENT & ADVANCED SETTINGS
+# ============================================================================
+environment:
+  # Data directory
+  data_dir: "./data/"
+  models_dir: "./models/"
+  logs_dir: "./logs/"
+  
+  # Threading
+  use_threading: true
+  max_workers: 4
+  
+  # API timeouts
+  api_timeout_seconds: 30
+  
+  # Performance optimization
+  use_gpu: false  # Use GPU for ML model if available
+  batch_processing: true
