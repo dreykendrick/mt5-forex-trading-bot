@@ -67,7 +67,6 @@ mt5-ai-bot/
 
 ## Setup
 ### 1) Create Virtual Environment
-**Recommended Python:** 3.10–3.12. Python 3.13 may fail to install `pyarrow` wheels on Windows; if so, use Python 3.12 or install `pyarrow` via conda. 
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
@@ -120,7 +119,7 @@ python scripts/run_live.py
 - **Retcode 10027 (invalid stops):** Ensure SL/TP respects `stops_level` + safety buffer.
 - **No ticks / market closed:** Confirm symbol is available and market open.
 - **Trade context busy / requotes:** Built-in retries handle transient issues; check logs if repeated.
-- **pyarrow build error on Windows:** Use Python 3.12 or install `pyarrow` from conda-forge, then re-run `pip install -r requirements.txt`.
+
 
 ## Safety Notes
 - Use demo account for initial testing.
