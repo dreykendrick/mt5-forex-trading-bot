@@ -1,4 +1,4 @@
-MetaTrader5==5.0.45
+MetaTrader5>=5.0.4682,<6.0
 pandas==2.2.2
 numpy==1.26.4
 pyyaml==6.0.2
