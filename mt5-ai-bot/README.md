@@ -120,6 +120,7 @@ python scripts/run_live.py
 - **No ticks / market closed:** Confirm symbol is available and market open.
 - **Trade context busy / requotes:** Built-in retries handle transient issues; check logs if repeated.
 
+
 ## Safety Notes
 - Use demo account for initial testing.
 - Set conservative risk (default 0.5% per trade).
