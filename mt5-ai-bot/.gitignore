@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+logs/
+trades/
+data/processed/
+KILL_SWITCH
